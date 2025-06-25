@@ -63,7 +63,7 @@ export const addShow = async (req, res) => {
         release_date: movieApiData.release_date,
         original_language: movieApiData.original_language,
         tagline: movieApiData.tagline || "",
-        vote_Average: movieApiData.vote_Average,
+        vote_average: movieApiData.vote_average,
         runtime: movieApiData.runtime,
       };
       //   add movie to database
