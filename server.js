@@ -5,6 +5,7 @@ import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js";
+import showRouter from "./routes/showRoutes.js";
 
 const app = express();
 const port = 3000;
@@ -34,6 +35,8 @@ app.use(
     functions,
   })
 );
+
+app.use("/api/show", showRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
