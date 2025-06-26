@@ -12,6 +12,10 @@ export const protectAdmin = async (req, res, next) => {
     }
     next();
   } catch (err) {
+    return res.json({
+      success: false,
+      message: "not authorized",
+    });
     console.log(err);
   }
 };
