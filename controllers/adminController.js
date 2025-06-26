@@ -1,6 +1,7 @@
 // api to check if user is admin
 
 import Booking from "../models/Booking";
+import Show from "../models/Show";
 
 export const isAdmin = async (req, res) => {
   res.json({
@@ -39,6 +40,60 @@ export const getDashboardData = async (req, res) => {
     console.log(err);
     res.json({
       success: true,
+      message: err.message,
+    });
+  }
+};
+
+// api to get all shows
+export const getAllShows = async (req, res) => {
+  try {
+    const shows = await Show.find({
+      showDateTime: {
+        $gte: new Date(),
+      },
+    })
+      .populate("movie")
+      .sort({
+        showDateTime: 1,
+      });
+    res.json({
+      success: true,
+      shows,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({
+      success: true,
+      message: err.message,
+    });
+  }
+};
+
+// api to get sll the bookings
+
+export const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find({})
+      .populate("user")
+      .populate({
+        path: "show",
+        populate: {
+          path: "movie",
+        },
+      })
+      .sort({
+        createdAt: -1,
+      });
+
+    res.json({
+      success: true,
+      bookings,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({
+      success: false,
       message: err.message,
     });
   }
