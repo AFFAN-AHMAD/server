@@ -101,6 +101,7 @@ export const addShow = async (req, res) => {
 // api to get all the shows
 export const getShows = async (req, res) => {
   try {
+    console.log("dsajksadj;ldsaf");
     const shows = await Show.find({
       showDateTime: {
         $gte: new Date(),
